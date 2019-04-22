@@ -4,11 +4,10 @@ import 'package:realtime_chat_app/ui/home_page.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Realtime Chat',
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
