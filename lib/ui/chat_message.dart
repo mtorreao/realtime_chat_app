@@ -16,7 +16,9 @@ class ChatMessage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(right: 16.0),
             child: CircleAvatar(
-              backgroundImage: NetworkImage(data["senderPhotoUrl"]),
+              backgroundImage: data["senderPhotoUrl"] != null ? NetworkImage(
+                  data["senderPhotoUrl"]) : AssetImage(
+                  'images/Upside-Down_Face_Emoji.png'),
             ),
           ),
           Expanded(
