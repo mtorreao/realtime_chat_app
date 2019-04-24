@@ -15,7 +15,11 @@ class Message {
     var differenceInSeconds = (today.millisecondsSinceEpoch -
         createdDate.millisecondsSinceEpoch) / 1000;
     print(differenceInSeconds);
-    if (differenceInSeconds >= 3600) {
+    if (differenceInSeconds >= 31536000) {
+      return '${(differenceInSeconds / 31536000).toStringAsFixed(0)} years ago';
+    } else if (differenceInSeconds >= 86400) {
+      return '${(differenceInSeconds / 86400).toStringAsFixed(0)} days ago';
+    } else if (differenceInSeconds >= 3600) {
       return '${(differenceInSeconds / 3600).toStringAsFixed(0)} hours ago';
     } else if (differenceInSeconds >= 60) {
       return '${(differenceInSeconds / 60).toStringAsFixed(0)} minutes ago';
