@@ -1,16 +1,18 @@
 class Message {
   String id;
   String text;
-  String sender;
+  String senderName;
   DateTime createdDate;
 
-  Message({this.text, this.sender});
+  Message({this.text, this.senderName}) {
+    createdDate = DateTime.now();
+  }
 
-  toMap() {
-    var map = Map();
-    map['id'] = id;
+  Map<String, dynamic> toMap() {
+    var map = Map<String, dynamic>();
+    if (id != null) map['id'] = id;
     map['text'] = text;
-    map['sender'] = sender;
+    map['senderName'] = senderName;
     map['createdDate'] = createdDate;
     return map;
   }
@@ -18,7 +20,7 @@ class Message {
   static Message fromMap(Map<String, dynamic> map) {
     var message = Message();
     message.text = map['text'];
-    message.text = map['sender'];
+    message.senderName = map['senderName'];
     return message;
   }
 }
