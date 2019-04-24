@@ -6,7 +6,7 @@ class Message {
   String senderPhotoUrl;
   String imgUrl;
 
-  Message({this.text, this.senderName}) {
+  Message({this.text, this.senderName, this.senderPhotoUrl, this.imgUrl}) {
     createdDate = DateTime.now();
   }
 
@@ -14,7 +14,6 @@ class Message {
     var today = DateTime.now();
     var differenceInSeconds = (today.millisecondsSinceEpoch -
         createdDate.millisecondsSinceEpoch) / 1000;
-    print(differenceInSeconds);
     if (differenceInSeconds >= 31536000) {
       return '${(differenceInSeconds / 31536000).toStringAsFixed(0)} years ago';
     } else if (differenceInSeconds >= 86400) {
@@ -24,7 +23,7 @@ class Message {
     } else if (differenceInSeconds >= 60) {
       return '${(differenceInSeconds / 60).toStringAsFixed(0)} minutes ago';
     } else {
-      return '${differenceInSeconds.toStringAsFixed(0)} seconds ago';
+      return 'just now';
     }
   }
 

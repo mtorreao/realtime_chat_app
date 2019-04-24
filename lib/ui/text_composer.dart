@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:realtime_chat_app/util/auth_service.dart';
 import 'package:realtime_chat_app/util/message.dart';
 
 class TextComposer extends StatefulWidget {
@@ -35,11 +36,14 @@ class _TextComposerState extends State<TextComposer> {
   Future _sendMessage() async {
     var messageText = _messageTextController.text;
 
+    var user = await AuthService().handleSignIn();
     if (messageText.isNotEmpty) {
       try {
         await Firestore.instance
             .collection('realtime_chat_app_messages')
-            .add(Message(senderName: 'Me', text: messageText).toMap());
+            .add(Message(senderName: user.displayName,
+            text: messageText,
+            senderPhotoUrl: user.photoUrl).toMap());
         Scaffold.of(context).showSnackBar(SnackBar(
           content: Text('Mensagem enviada!'),
           duration: Duration(seconds: 2),
@@ -54,3 +58,5 @@ class _TextComposerState extends State<TextComposer> {
     }
   }
 }
+
+
