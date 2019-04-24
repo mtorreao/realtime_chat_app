@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:realtime_chat_app/util/message.dart';
 
 class ChatMessage extends StatelessWidget {
 
-  final Map<String, dynamic> data;
+  final Message message;
 
-  ChatMessage(this.data);
+  ChatMessage(this.message);
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +17,8 @@ class ChatMessage extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(right: 16.0),
             child: CircleAvatar(
-              backgroundImage: data["senderPhotoUrl"] != null ? NetworkImage(
-                  data["senderPhotoUrl"]) : AssetImage(
+              backgroundImage: message.senderPhotoUrl != null ? NetworkImage(
+                  message.senderPhotoUrl) : AssetImage(
                   'images/Upside-Down_Face_Emoji.png'),
             ),
           ),
@@ -26,15 +27,24 @@ class ChatMessage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  data["senderName"],
+                  message.senderName,
                   style: Theme.of(context).textTheme.subhead,
                 ),
+                Text(message.createdDate != null ? message.sendAt() : '',
+                    style: Theme
+                        .of(context)
+                        .textTheme
+                        .caption),
                 Container(
                     margin: const EdgeInsets.only(top: 5.0),
-                    child: data["imgUrl"] != null ?
-                    Image.network(data["imgUrl"], width: 250.0,) :
-                    Text(data["text"])
-                )
+                    child: message.imgUrl != null ?
+                    Image.network(message.imgUrl, width: 250.0,) :
+                    Text(message.text, style: Theme
+                        .of(context)
+                        .textTheme
+                        .body1,)
+                ),
+
               ],
             ),
           )

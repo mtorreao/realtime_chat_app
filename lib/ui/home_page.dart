@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:realtime_chat_app/ui/chat_message.dart';
 import 'package:realtime_chat_app/ui/text_composer.dart';
+import 'package:realtime_chat_app/util/message.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -24,6 +25,7 @@ class _HomePageState extends State<HomePage> {
                 child: StreamBuilder(
                     stream: Firestore.instance
                         .collection('realtime_chat_app_messages')
+                        .orderBy('createdDate', descending: true)
                         .snapshots(),
                     builder: (context, snapshot) {
                       switch (snapshot.connectionState) {
@@ -37,8 +39,9 @@ class _HomePageState extends State<HomePage> {
                               reverse: true,
                               itemCount: snapshot.data.documents.length,
                               itemBuilder: (context, index) {
-                                return ChatMessage(
+                                var message = Message.fromMap(
                                     snapshot.data.documents[index].data);
+                                return ChatMessage(message);
                               });
                       }
                     })),
