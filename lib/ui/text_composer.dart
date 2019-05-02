@@ -59,6 +59,7 @@ class _TextComposerState extends State<TextComposer> {
     var user = await AuthService().handleSignIn();
     if (messageText.isNotEmpty || imageUrl.isNotEmpty) {
       try {
+        _messageTextController.text = '';
         await Firestore.instance.collection('realtime_chat_app_messages').add(
             Message(
                 senderName: user.displayName,
@@ -66,10 +67,6 @@ class _TextComposerState extends State<TextComposer> {
                 imgUrl: imageUrl ?? null,
                 senderPhotoUrl: user.photoUrl)
                 .toMap());
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text('Mensagem enviada!'),
-          duration: Duration(seconds: 2),
-        ));
       } catch (e) {
         print(e);
         Scaffold.of(context).showSnackBar(SnackBar(

@@ -44,7 +44,6 @@ class ChatMessage extends StatelessWidget {
                         .textTheme
                         .body1,)
                 ),
-
               ],
             ),
           )
